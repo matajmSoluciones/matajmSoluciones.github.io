@@ -85,64 +85,9 @@
                             </div>
                             <div class="column is-10 has-text-justified">
                                 <h2 class="title is-3 has-text-centered-mobile">Criptomonedas</h2>
-                                <button class="button is-medium is-link" data-show="modal-crypto">Pagar</button>
+                                <button class="button is-medium is-link" id="button-cryptopayment">Pagar</button>
                             </div>
                             <!-- Fin columna -->
-                        </div>
-                        <div class="modal" id="modal-crypto">
-                            <div class="modal-background"></div>
-                            <div class="modal-content">
-                                <!-- Any other Bulma elements you want -->
-                                <div class="box">
-                                    <div class="columns is-mobile is-centered">
-                                        <div class="column is-8">
-                                            <h1 class="title is-3 has-text-centered">Pagar con cryptomonedas</h1>
-                                            <form method="post" id="create-transaction-crypto">
-                                                <div class="field">
-                                                    <label for="email" class="label">Correo electr&oacute;nico</label>
-                                                    <div class="control has-icons-left">
-                                                        <input class="input" type="email" placeholder="Correo electr&oacute;nico" id="email" name="email">
-                                                        <span class="icon is-small is-left">
-                                                            <i class="fas fa-envelope"></i>
-                                                        </span>
-                                                    </div>
-                                                    <p class="help">Notifica del estado del pago por correo.</p>
-                                                </div>
-                                                <div class="field">
-                                                    <label for="amount" class="label">Monto</label>
-                                                    <div class="control">
-                                                        <div class="field has-addons has-addons-centered">
-                                                            <p class="control">
-                                                                <a class="button is-static">$</a>
-                                                            </p>
-                                                            <p class="control">
-                                                                <input class="input" type="text" placeholder="Monto" id="amount" name="amount">
-                                                            </p>
-                                                            <p class="control">
-                                                                <span class="icon is-small has-margin-right-5 has-margin-left-5">
-                                                                    <i class="fas fa-envelope"></i>
-                                                                </span>
-                                                            </p>
-                                                            <p class="control">
-                                                                <span class="select">
-                                                                    <select id="currency" name="currency"></select>
-                                                                </span>
-                                                            </p>
-                                                            <p class="control">
-                                                                <input class="input" type="text" placeholder="Monto" id="amount" name="amount">
-                                                            </p>
-                                                            <p class="control">
-                                                                <button class="button is-info">Pagar</button>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="modal-close is-large" aria-label="close"></button>
                         </div>
                         <div class="modal" id="modal-crypto-receive">
                             <div class="modal-background"></div>
@@ -161,6 +106,7 @@
                                                     </figure>
                                                 </div>
                                             </div>
+                                            <p class="subtitle is-3" id="amount-pay-help"></p>
                                             <small>Le notificaremos a trav&eacute;s de su correo electr&oacute;nico cuando su pago sea confirmado.</small>
                                         </div>
                                     </div>
@@ -168,7 +114,7 @@
                             </div>
                             <button class="modal-close is-large" aria-label="close"></button>
                         </div>
-                        <div class="modal is-active" id="modal-crypto-finish">
+                        <div class="modal" id="modal-crypto-finish">
                             <div class="modal-background"></div>
                             <div class="modal-content">
                                 <!-- Any other Bulma elements you want -->
@@ -176,15 +122,15 @@
                                     <div class="columns is-mobile is-centered">
                                         <div class="column is-8 has-text-centered">
                                             <h3 class="title is-3">Pago finalizado</h3>
-                                            <h4 class="subtitle is-">Gracias por su transferencia</h4>
+                                            <h4 class="subtitle is-4 has-margin-bottom-10">Gracias por su transferencia</h4>
                                             <div class="columns is-mobile is-centered">
-                                                <div class="column notification is-success circle">
-                                                    <span class="icon is-large">
+                                                <div class="column">
+                                                    <span class="icon is-large notification is-success has-expanded-icon-4 is-icon-circle">
                                                         <i class="fas fa-check fa-5x"></i>
                                                     </span>
                                                 </div>
                                             </div>
-                                            <small>Le notificaremos a trav&eacute;s de su correo electr&oacute;nico cuando su pago sea confirmado.</small>
+                                            <a id="url-help-crypto" target="_blank" class="button is-link has-margin-top-10">Ver detalles</a>
                                         </div>
                                     </div>
                                 </div>
@@ -197,6 +143,7 @@
             </div>
         </div>
     </section>
+    <div id="elements"></div>
     <footer class="footer">
         <div class="columns is-centered">
             <div class="column is-4">
