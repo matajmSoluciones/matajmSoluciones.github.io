@@ -380,3 +380,9 @@ $class-slug: for !default
 
 .is-self-align-right
     align-self: flex-end
+
+@for $i from 1 through 10
+  .has-expanded-icon-#{$i}
+    padding: 0em + $i
+  .has-expanded-icon-sm-#{$i}
+    padding: ($i / 10) + 0em
