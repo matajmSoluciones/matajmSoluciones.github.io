@@ -1,0 +1,34 @@
+.is-justify-content-center {
+    justify-content: center;
+}
+.is-justify-content-right {
+    justify-content: flex-end;
+}
+.is-justify-content-left {
+    justify-content: flex-start;
+}
+.is-self-align-center {
+    align-self: center;
+}
+.is-self-align-left {
+    align-self: flex-start;
+}
+.is-self-align-right {
+    align-self: flex-end;
+}
+.margin-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+.margin-top-5 {
+    margin-top: 5px;
+}
+.margin-top-10 {
+    margin-top: 10px;
+}
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
