@@ -8,29 +8,48 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"> -->
     <link rel="stylesheet" href="/vendor/bulma.min.css">
     <link rel="stylesheet" href="/styles.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" async></script>
 </head>
 <body class="is-family-sans-serif">
     <section class="hero is-primary is-middle is-fullheight">
         <div class="hero-body has-text-centered">
             <div class="container">
-                <figure class="image is-128x128 margin-center margin-bottom-5">
-                    <img class="is-rounded" src="/vendor/128x128.png">
-                </figure>
-                <div class="container">
-                    <div class="column">Github</div>
-                    <div class="column">Gitlab</div>
-                    <div class="column">Telegram</div>
+                <div class="columns is-mobile is-centered">
+                    <figure class="image is-128x128">
+                        <img class="is-rounded" src="/vendor/128x128.png">
+                    </figure>
+                </div>
+                <div class="columns is-mobile is-centered">
+                    <div class="column is-8 buttons is-justify-content-center">
+                        <a class="button is-primary is-inverted is-outlined is-icon-circle">
+                            <span class="icon">
+                                <i class="fab fa-github"></i>
+                            </span>
+                        </a>
+                        <a class="button is-primary is-inverted is-outlined is-icon-circle">
+                            <span class="icon">
+                                    <i class="fab fa-twitter"></i>
+                            </span>
+                        </a>
+                        <a class="button is-primary is-inverted is-outlined is-icon-circle">
+                            <span class="icon">
+                                    <i class="fab fa-telegram"></i>
+                            </span>
+                        </a>
+                    </div>
                 </div>
                 <h1 class="title is-2">Matajm Soluciones</h1>
                 <h2 class="subtitle">Desarrollo de aplicaciones web full-stack</h2>
                 <div class="container margin-top-10">
-                    <form action="">
-                        <input type="text">
-                        <button>Enviar</button>
+                    <form action="" class="form-inline">
+                        <div class="field">
+                                <input class="input" type="text">
+                                <button class="button">Suscribirse</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-</body>
+</body>          
 </html>
