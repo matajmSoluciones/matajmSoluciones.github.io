@@ -32,3 +32,27 @@
 .margin-bottom-10 {
     margin-bottom: 10px;
 }
+
+.is-icon-circle {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+}
+
+.form-inline .field {
+    display: flex;
+}
+
+.form-inline .field > * {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.form-inline .field > .input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-inline .field > .button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
