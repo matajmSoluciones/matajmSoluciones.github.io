@@ -1,3 +1,6 @@
+.text-color-black {
+    color: black;
+}
 .is-justify-content-center {
     justify-content: center;
 }
@@ -55,4 +58,20 @@
 .form-inline .field > .button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+}
+
+.avatar {
+    margin-top: -70px;
+}
+
+.no-border {
+    border: 0;
+}
+
+.cover {
+    margin-top: 70px;
+}
+
+.cover .title, .cover .subtitle {
+    color: black !important;
 }
