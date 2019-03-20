@@ -61,18 +61,34 @@
     border-bottom-left-radius: 0;
 }
 
-.avatar {
-    margin-top: -70px;
-}
-
 .no-border {
     border: 0;
 }
 
 .cover {
-    margin-top: 70px;
+    min-height: 350px;
+    color: #232222 !important;
 }
 
-.cover .title, .cover .subtitle {
-    color: black !important;
+.main-box {
+    margin-top: -200px;
+    margin-bottom: 0 !important;
+    height: 400px;
+}
+
+.main-box .avatar {
+    margin-top: -64px;
+}
+
+.main-box + .first-content {
+    margin-top: -200px;
+    padding-top: 200px;
+}
+
+.is-gray {
+    background-color: #f2f2f2;
+}
+
+.main-box .title, .main-box .subtitle {
+    line-height: 1.8;
 }
