@@ -82,7 +82,7 @@
 
 .main-box + .first-content {
     margin-top: -200px;
-    padding-top: 200px;
+    padding-top: 250px;
 }
 
 .is-gray {
@@ -91,4 +91,10 @@
 
 .main-box .title, .main-box .subtitle {
     line-height: 1.8;
+}
+
+@media screen and (max-width: 600px) {
+    .main-box + .first-content {
+        padding-top: 400px;
+    }
 }
