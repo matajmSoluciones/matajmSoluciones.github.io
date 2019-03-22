@@ -66,12 +66,12 @@
 }
 
 .cover {
-    min-height: 350px;
+    min-height: 250px;
     color: #232222 !important;
 }
 
 .main-box {
-    margin-top: -200px;
+    margin-top: -160px;
     margin-bottom: 0 !important;
     height: 400px;
 }
@@ -81,7 +81,7 @@
 }
 
 .main-box + .first-content {
-    margin-top: -200px;
+    margin-top: -240px;
     padding-top: 250px;
 }
 
