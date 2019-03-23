@@ -1,0 +1,8 @@
+name: matajm Soluciones
+description: Desarrollo de aplicaciones web
+avatar: https://www.gravatar.com/avatar/86a5f43adbde2f2f09648c217ad6cc77
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
