@@ -29,13 +29,48 @@
 .margin-top-10 {
     margin-top: 10px;
 }
+.padding-top-5 {
+    padding-top: 5px;
+}
+.padding-top-10 {
+    padding-top: 10px;
+}
+.margin-left-5 {
+    margin-left: 5px;
+}
+.margin-left-10 {
+    margin-left: 10px;
+}
+.padding-left-5 {
+    padding-left: 5px;
+}
+.padding-left-10 {
+    padding-left: 10px;
+}
 .margin-bottom-5 {
     margin-bottom: 5px;
 }
 .margin-bottom-10 {
     margin-bottom: 10px;
 }
-
+.padding-bottom-5 {
+    padding-bottom: 5px;
+}
+.padding-bottom-10 {
+    padding-bottom: 10px;
+}
+.margin-right-5 {
+    margin-right: 5px;
+}
+.margin-right-10 {
+    margin-right: 10px;
+}
+.padding-right-5 {
+    padding-right: 5px;
+}
+.padding-right-10 {
+    padding-right: 10px;
+}
 .is-icon-circle {
     border-radius: 50%;
     width: 36px;
@@ -66,35 +101,33 @@
 }
 
 .cover {
-    min-height: 250px;
-    color: #232222 !important;
+    min-height: 350px;
 }
 
 .main-box {
-    margin-top: -160px;
-    margin-bottom: 0 !important;
-    height: 400px;
+    margin-top: -185px;
 }
 
 .main-box .avatar {
     margin-top: -64px;
 }
 
-.main-box + .first-content {
-    margin-top: -240px;
-    padding-top: 250px;
-}
-
 .is-gray {
     background-color: #f2f2f2;
+}
+
+.is-black-metro {
+    background-color: #24292e !important;
+}
+.is-black-metro, .is-black-metro .title, .is-black-metro .subtitle {
+    color: white !important;
 }
 
 .main-box .title, .main-box .subtitle {
     line-height: 1.8;
 }
 
-@media screen and (max-width: 600px) {
-    .main-box + .first-content {
-        padding-top: 400px;
-    }
+.main-box .separator {
+    margin-top:24px;
+    margin-bottom: 24px;
 }
