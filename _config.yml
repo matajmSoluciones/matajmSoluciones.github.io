@@ -6,3 +6,7 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
+  - node_modules
+  - package.json
+  - package-lock.json
+  - webpack.config.js

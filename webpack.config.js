@@ -14,7 +14,11 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.sass$/,
+                test: /\.(ttf|svg|woff)$/,
+                loader: "url-loader"
+            },
+            {
+                test: /\.(sass|scss)$/,
                 loader: ExtractTextPlugin.extract({
                     use: 'css-loader!sass-loader'
                 })
