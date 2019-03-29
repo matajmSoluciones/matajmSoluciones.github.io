@@ -5,7 +5,7 @@ const path = require("path"),
 
 module.exports = {
     entry: {
-        style: "./src/styles/main.sass"
+        style: "./src/styles/_all.sass"
     },
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -14,8 +14,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(ttf|svg|woff)$/,
-                loader: "url-loader"
+                test: /\.(woff2?|eot|ttf|otf|svg|jpeg|jpg|png|gif)(\?.*)?$/,
+                loader: 'url-loader',
+                options: { limit: 1000, name: 'fonts/[name].[ext]', },
             },
             {
                 test: /\.(sass|scss)$/,

@@ -4,7 +4,7 @@
   "description": "Pagina web publicitaria",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -18,12 +18,14 @@
   "license": "ISC",
   "dependencies": {
     "bulma": "^0.7.2",
+    "font-awesome": "^4.7.0",
     "node-sass": "^4.10.0",
     "sass": "^1.15.1"
   },
   "devDependencies": {
     "css-loader": "^1.0.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^2.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
