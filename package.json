@@ -1,0 +1,32 @@
+{
+  "name": "matajmsoluciones.github.io",
+  "version": "1.0.0",
+  "description": "Pagina web publicitaria",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://192.168.1.102:2030/matajm/matajmSoluciones.github.io.git"
+  },
+  "keywords": [
+    "freelancer",
+    "developer"
+  ],
+  "author": "Jhonny Mata",
+  "license": "ISC",
+  "dependencies": {
+    "bulma": "^0.7.2",
+    "node-sass": "^4.10.0",
+    "sass": "^1.15.1"
+  },
+  "devDependencies": {
+    "css-loader": "^1.0.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.0.0-beta.3",
+    "webpack-cli": "^3.1.2"
+  }
+}
