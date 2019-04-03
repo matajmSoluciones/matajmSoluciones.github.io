@@ -5,7 +5,10 @@ const path = require("path"),
 
 module.exports = {
     entry: {
-        style: "./src/styles/_all.sass"
+        main: [
+            "./src/js/main.js",
+            "./src/styles/_all.sass"
+        ]
     },
     output: {
         path: path.resolve(__dirname, "dist"),
