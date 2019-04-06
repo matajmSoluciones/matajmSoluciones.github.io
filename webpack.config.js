@@ -1,6 +1,7 @@
 const path = require("path"),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    extractCSS = new ExtractTextPlugin('style.css');
+    extractCSS = new ExtractTextPlugin('style.css'),
+    Dotenv = require('dotenv-webpack');
 
 
 module.exports = {
@@ -8,11 +9,12 @@ module.exports = {
         main: [
             "./src/js/main.js",
             "./src/styles/_all.sass"
-        ]
+        ],
+        pay: "./src/js/pay.js"
     },
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "main.js"
+        filename: "[name].js"
     },
     module: {
         rules: [
@@ -36,6 +38,7 @@ module.exports = {
         ]
     },
     plugins: [
-        extractCSS
+        extractCSS,
+        new Dotenv()
     ]
 };
