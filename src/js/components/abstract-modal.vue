@@ -32,14 +32,12 @@ export default {
   methods: {
     hiden() {
       this.isActive = false;
-      console.log(this.isActive);
       this.$emit('closed');
     }
   },
   watch: {
     closed(val) {
-      console.log(val);
-      if (this.rendered && val) {
+      if (this.rendered && !val) {
         this.$emit('opened');
       }
       this.isActive = !this.closed;
