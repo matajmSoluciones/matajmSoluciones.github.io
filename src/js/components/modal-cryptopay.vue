@@ -1,5 +1,5 @@
 <template>
-    <ModalAbstract id="modal-crypto" :closed="closed" @closed="closeDialog" @opened="updateCurrencies">
+    <ModalAbstract id="modal-crypto" :closed="closed" @closed="closeDialog" @opened="openDialog">
         <div class="box" v-if="pages.form">
             <div class="columns is-mobile is-centered">
                 <div class="column is-8">
@@ -8,7 +8,7 @@
                         <div class="field">
                             <label for="email" class="label">Correo electr&oacute;nico</label>
                             <div class="control has-icons-left">
-                                <input class="input" type="email" placeholder="Correo electronico" id="email" name="email" v-model="models.email">
+                                <input class="input is-medium" type="email" placeholder="Correo electronico" id="email" name="email" v-model="models.email">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-envelope"></i>
                                 </span>
@@ -16,35 +16,45 @@
                             <p class="help">Notifica del estado del pago por correo.</p>
                         </div>
                         <div class="field">
+                            <label for="amount" class="label">Criptomoneda</label>
+                            <div class="control is-expanded has-icons-left">
+                                <div :class="{ 'select': true, 'is-fullwidth': true, 'is-medium': true, 'is-loading': isLoadingCurrency }">
+                                    <select id="currency" name="currency" v-model="models.currency">
+                                        <option value="">Seleccione una criptomoneda</option>
+                                        <option v-for="currency in currencies" :key="currency" :value="currency">{{ currency }}</option>
+                                    </select>
+                                </div>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-coins"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
                             <label for="amount" class="label">Monto</label>
                             <div class="control">
                                 <div class="field has-addons has-addons-centered">
                                     <p class="control">
-                                        <a class="button is-static">$</a>
+                                        <a class="button is-medium is-static">$</a>
                                     </p>
                                     <p class="control">
-                                        <input class="input" type="text" placeholder="Monto" id="amount" name="amount" v-model="models.amount">
+                                        <input class="input is-medium" type="text" placeholder="0.00" id="amount" name="amount" v-model="models.amount">
                                     </p>
-                                    <p class="control">
-                                        <span class="icon is-small has-margin-right-5 has-margin-left-5">
-                                            <i class="fas fa-envelope"></i>
+                                    <div class="control margin-vcenter margin-center has-padding-left-10 has-padding-right-10">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-exchange-alt"></i>
                                         </span>
+                                    </div>
+                                    <p class="control">
+                                        <a class="button is-medium is-static">{{ models.currency }}</a>
                                     </p>
                                     <p class="control">
-                                        <span class="select">
-                                            <select id="currency" name="currency" v-model="models.currency">
-                                                <option v-for="currency in currencies" :key="currency" :value="currency">{{ currency }}</option>
-                                            </select>
-                                        </span>
-                                    </p>
-                                    <p class="control">
-                                        <input class="input" type="text" placeholder="Monto" id="amount" name="amount">
-                                    </p>
-                                    <p class="control">
-                                        <button class="button is-info" :disable="sending">Pagar</button>
+                                        <input class="input is-medium" type="text" placeholder="0.00000000" id="amountValue" name="amountValue" v-model="models.amountValue">
                                     </p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="control">
+                            <button :class="{ 'button': true, 'is-medium': true, 'is-fullwidth': true, 'is-info': true, 'is-loading': sending }" :disable="sending">Pagar</button>
                         </div>
                     </form>
                 </div>
@@ -93,6 +103,7 @@
 <script>
 import ModalAbstract from "./abstract-modal.vue"
 import Coinpayments from "coinpayments"
+import * from "error-polyfill"
 
 
 const client = new Coinpayments({
@@ -128,7 +139,8 @@ export default {
             urlDetail: null,
             sending: false,
             stopRate: false,
-            closed: true
+            closed: true,
+            isLoadingCurrency: false
         }
     },
     methods: {
@@ -138,7 +150,11 @@ export default {
                 console.log(page, this.pages[page]);
             }
         },
+        isActivePage (name) {
+            return !!this.pages[name];
+        },
         createTransaction () {
+            this.sending = true;
             client.createTransaction({
                 currency1: "USD",
                 currency2: this.models.currency,
@@ -149,18 +165,12 @@ export default {
                 this.addressReceive = data.address;
                 this.urlDetail = data.status_url;
                 this.urlQR = data.qrcode_url;
-                this.checkTransactionCrypto(data.txn_id, (error, data) => {
-                    this.sending = false;
-                    if (error) {
-                        this.succesed = false;
-                        this.showPage("send");
-                        return;
-                    }
-                    this.stopRate = true;
-                    this.amountPay = data.amountf;
-                    this.currencyPay = data.coin;
-                    this.showPage("send");
-                });
+                this.amountPay = data.amount;
+                this.currencyPay = this.models.currency;
+                this.sending = false;
+                this.stopRate = true;
+                this.showPage("send");
+                this.checkTransactionCrypto(data.txn_id);
             })
             .catch(function (error) {
                 console.error(error);
@@ -171,9 +181,13 @@ export default {
             console.log(this.models);
         },
         updateCurrencies() {
+            if (this.isLoadingCurrency) {
+                return;
+            }
             if (this.sending) {
                 return setTimeout(this.updateCurrencies, INTERVAL_GET_INFO);
             }
+            this.isLoadingCurrency = true;
             console.log("Actualizando monedas");
             client.rates({ accepted: 1 })
             .then((data) => {
@@ -197,6 +211,7 @@ export default {
                 if (this.stopRate) {
                     return;
                 }
+                this.isLoadingCurrency = false;
                 setTimeout(this.updateCurrencies, INTERVAL_GET_INFO);
             });
         },
@@ -222,8 +237,18 @@ export default {
             .catch(loop);
         },
         closeDialog() {
-            console.log("hola enfermera", this.closed);
             this.closed = true;
+            this.stopRate = true;
+            if (this.isActivePage("finish")) {
+                this.showPage("form");
+            }
+        },
+        openDialog () {
+            console.log("abierto el dialogo");
+            this.stopRate = false;
+            this.sending = false;
+            this.succesed = false;
+            this.updateCurrencies();
         }
     }
 }
