@@ -4,7 +4,7 @@
             <div class="columns is-mobile is-centered">
                 <div class="column is-8">
                     <h1 class="title is-3 has-text-centered">Pagar con cryptomonedas</h1>
-                    <form @submit.prevent="createTransaction" id="create-transaction-crypto">
+                    <form @submit.prevent="submitPay" id="create-transaction-crypto">
                         <div class="field">
                             <label for="email" class="label">Correo electr&oacute;nico</label>
                             <div class="control has-icons-left">
@@ -13,7 +13,8 @@
                                     <i class="fas fa-envelope"></i>
                                 </span>
                             </div>
-                            <p class="help">Notifica del estado del pago por correo.</p>
+                            <p class="help is-danger" v-if="formError.email">This email is invalid</p>
+                            <p class="help">{{ formError.email }}</p>
                         </div>
                         <div class="field">
                             <label for="amount" class="label">Criptomoneda</label>
@@ -27,6 +28,7 @@
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-coins"></i>
                                 </span>
+                                <p class="help is-danger" v-if="formError.currency">{{ formError.currency }}</p>
                             </div>
                         </div>
                         <div class="field">
@@ -52,6 +54,7 @@
                                     </p>
                                 </div>
                             </div>
+                            <p class="help is-danger" v-if="formError.amount">{{ formError.amount }}</p>
                         </div>
                         <div class="control has-margin-top-10 has-margin-bottom-10" v-if="errorForm">
                             <div class="notification is-danger">
@@ -60,7 +63,7 @@
                             </div>
                         </div>
                         <div class="control">
-                            <button :class="{ 'button': true, 'is-medium': true, 'is-fullwidth': true, 'is-info': true, 'is-loading': sending }" :disable="sending">Pagar</button>
+                            <button :class="{ 'button': true, 'is-medium': true, 'is-fullwidth': true, 'is-info': true, 'is-loading': sending }" :disable="sending || !isValidate">Pagar</button>
                         </div>
                     </form>
                 </div>
@@ -110,13 +113,19 @@
 import ModalAbstract from "./abstract-modal.vue"
 import Coinpayments from "coinpayments"
 import error_polyfill from "error-polyfill"
+import Schema from "async-validator"
 
 
 const client = new Coinpayments({
     key: process.env.COINPAYMENT_PUBLIC_KEY,
     secret: process.env.COINPAYMENT_PRIVATE_KEY
 }),
-    INTERVAL_GET_INFO = 30000; // milisegundos
+    INTERVAL_GET_INFO = 30000, // milisegundos
+    SCHEMA_CRYPTO_PAY = new Schema({
+        email: { type: 'email', required: true },
+        currency: { type: 'string', required: true },
+        amount: { type: 'string', required: true }
+    });
 
 
 export default {
@@ -130,6 +139,7 @@ export default {
                 amount: null,
                 currency: null
             },
+            formError: {},
             pages: {
                 form: true,
                 send: false,
@@ -147,7 +157,8 @@ export default {
             sending: false,
             stopRate: false,
             closed: true,
-            isLoadingCurrency: false
+            isLoadingCurrency: false,
+            isValidate: false
         }
     },
     methods: {
@@ -160,20 +171,33 @@ export default {
         isActivePage (name) {
             return !!this.pages[name];
         },
-        createTransaction () {
+        submitPay () {
+            SCHEMA_CRYPTO_PAY.validate(this.models, (err, res) => {
+                if (err) {
+                    this.isValidate = false;
+                    err.forEach((rule) => {
+                        this.formError[rule.field] = rule.message;
+                    });
+                    return;
+                }
+                this.isValidate = true;
+                this.createTransaction(this.models);
+            });
+        },
+        createTransaction (models) {
             this.sending = true;
             client.createTransaction({
                 currency1: "USD",
-                currency2: this.models.currency,
-                amount: this.models.amount,
-                buyer_email: this.models.email
+                currency2: models.currency,
+                amount: models.amount,
+                buyer_email: models.email
             })
             .then((data) => {
                 this.addressReceive = data.address;
                 this.urlDetail = data.status_url;
                 this.urlQR = data.qrcode_url;
                 this.amountPay = data.amount;
-                this.currencyPay = this.models.currency;
+                this.currencyPay = models.currency;
                 this.sending = false;
                 this.stopRate = true;
                 this.showPage("send");
@@ -184,7 +208,6 @@ export default {
                 this.sending = false;
                 this.succesed = false;
             });
-            console.log(this.models);
         },
         updateCurrencies() {
             if (this.isLoadingCurrency) {
