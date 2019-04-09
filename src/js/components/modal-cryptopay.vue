@@ -53,6 +53,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="control has-margin-top-10 has-margin-bottom-10" v-if="errorForm">
+                            <div class="notification is-danger">
+                              <button class="delete" @click="errorForm = null;"></button>
+                              {{ errorForm }}
+                            </div>
+                        </div>
                         <div class="control">
                             <button :class="{ 'button': true, 'is-medium': true, 'is-fullwidth': true, 'is-info': true, 'is-loading': sending }" :disable="sending">Pagar</button>
                         </div>
@@ -103,7 +109,7 @@
 <script>
 import ModalAbstract from "./abstract-modal.vue"
 import Coinpayments from "coinpayments"
-import * from "error-polyfill"
+import error_polyfill from "error-polyfill"
 
 
 const client = new Coinpayments({
@@ -129,6 +135,7 @@ export default {
                 send: false,
                 finish: false
             },
+            errorForm: null,
             currencies: [],
             rates: {},
             currencyPay: null,
@@ -172,11 +179,10 @@ export default {
                 this.showPage("send");
                 this.checkTransactionCrypto(data.txn_id);
             })
-            .catch(function (error) {
-                console.error(error);
+            .catch((error) => {
+                this.errorForm = "No se pudo procesar la transaccion!";
                 this.sending = false;
                 this.succesed = false;
-                this.showPage("finish");
             });
             console.log(this.models);
         },
@@ -211,6 +217,10 @@ export default {
                 if (this.stopRate) {
                     return;
                 }
+                this.isLoadingCurrency = false;
+                setTimeout(this.updateCurrencies, INTERVAL_GET_INFO);
+            })
+            .catch((error) => {
                 this.isLoadingCurrency = false;
                 setTimeout(this.updateCurrencies, INTERVAL_GET_INFO);
             });
