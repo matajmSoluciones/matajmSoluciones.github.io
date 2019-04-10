@@ -39,7 +39,7 @@
                                         <a class="button is-medium is-static">$</a>
                                     </p>
                                     <p class="control">
-                                        <input class="input is-medium" type="text" placeholder="0.00" id="amount" name="amount" v-model="models.amount">
+                                        <input class="input is-medium" type="text" placeholder="0.00" id="amount" name="amount" v-model="amountVal">
                                     </p>
                                     <div class="control margin-vcenter margin-center has-padding-left-10 has-padding-right-10">
                                         <span class="icon is-small">
@@ -50,7 +50,7 @@
                                         <a class="button is-medium is-static">{{ models.currency }}</a>
                                     </p>
                                     <p class="control">
-                                        <input class="input is-medium" type="text" placeholder="0.00000000" id="amountValue" name="amountValue" v-model="models.amountValue">
+                                        <input class="input is-medium" type="text" placeholder="0.00000000" id="amountValue" name="amountValue" v-model="amountValPay">
                                     </p>
                                 </div>
                             </div>
@@ -124,7 +124,9 @@ const client = new Coinpayments({
     SCHEMA_CRYPTO_PAY = new Schema({
         email: { type: 'email', required: true },
         currency: { type: 'string', required: true },
-        amount: { type: 'string', required: true }
+        amount: { type: 'number', required: true , validator: (rule, value) => {
+            return !isNaN(value) && value > 0;
+        }}
     });
 
 
@@ -145,9 +147,12 @@ export default {
                 send: false,
                 finish: false
             },
+            amountVal: null,
+            amountValPay: null,
             errorForm: null,
             currencies: [],
             rates: {},
+            fiats: {},
             currencyPay: null,
             amountPay: 0,
             succesed: true,
@@ -158,7 +163,8 @@ export default {
             stopRate: false,
             closed: true,
             isLoadingCurrency: false,
-            isValidate: false
+            isValidate: false,
+            isWatch: false
         }
     },
     methods: {
@@ -175,6 +181,7 @@ export default {
             SCHEMA_CRYPTO_PAY.validate(this.models, (err, res) => {
                 if (err) {
                     this.isValidate = false;
+                    this.formError = {};
                     err.forEach((rule) => {
                         this.formError[rule.field] = rule.message;
                     });
@@ -201,7 +208,9 @@ export default {
                 this.sending = false;
                 this.stopRate = true;
                 this.showPage("send");
-                this.checkTransactionCrypto(data.txn_id);
+                this.checkTransactionCrypto(data.txn_id, (error, data) => {
+                    console.log(error, data);
+                });
             })
             .catch((error) => {
                 this.errorForm = "No se pudo procesar la transaccion!";
@@ -222,7 +231,11 @@ export default {
             .then((data) => {
                 this.currencies = [];
                 this.rates = [];
-                for (var currency in data) {
+                this.fiats = {};
+                for (let currency in data) {
+                    if (["BTC", "USD"].indexOf(currency) !== -1) {
+                        this.fiats[currency] = data[currency];
+                    }
                     if (process.env.NODE_ENV !== "development" && (
                         !data[currency]
                         || data[currency].can_convert == 0
@@ -236,6 +249,10 @@ export default {
                     }
                     this.rates[currency] = data[currency];
                     this.currencies.push(currency);
+                }
+                this.fiats.BTC.rate_usd = 1 / this.fiats.USD.rate_btc;
+                for (let currency in this.rates) {
+                    this.rates[currency].rate_usd = this.fiats.BTC.rate_usd * this.rates[currency].rate_btc;
                 }
                 if (this.stopRate) {
                     return;
@@ -282,6 +299,33 @@ export default {
             this.sending = false;
             this.succesed = false;
             this.updateCurrencies();
+        }
+    },
+    watch: {
+        amountVal: function (amount) {
+            if (this.isWatch) {
+                return;
+            }
+            this.isWatch = true;
+            if (amount) {
+                this.amountVal = amount.replace(/\D/g, "")
+                .replace(/([0-9])([0-9]{2})$/, '$1.$2');
+            }
+            this.models.amount = amount;
+            if (this.models.currency) {
+                this.amountValPay = amount / this.rates[this.models.currency].rate_usd;
+            }
+            this.isWatch = false;
+        },
+        amountValPay: function (amount) {
+            if (this.isWatch) {
+                return;
+            }
+            this.isWatch = true;
+            if (this.models.currency) {
+                this.amountVal = amount * this.rates[this.models.currency].rate_usd;
+            }
+            this.isWatch = false;
         }
     }
 }
