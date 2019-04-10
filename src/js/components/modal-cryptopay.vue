@@ -39,7 +39,7 @@
                                         <a class="button is-medium is-static">$</a>
                                     </p>
                                     <p class="control">
-                                        <input class="input is-medium" type="text" placeholder="0.00" id="amount" name="amount" v-model="amountVal">
+                                        <input class="input is-medium" type="text" placeholder="0.00" id="amount" name="amount" v-model="amountVal" @keyup="parseAmountCurrency">
                                     </p>
                                     <div class="control margin-vcenter margin-center has-padding-left-10 has-padding-right-10">
                                         <span class="icon is-small">
@@ -50,7 +50,7 @@
                                         <a class="button is-medium is-static">{{ models.currency }}</a>
                                     </p>
                                     <p class="control">
-                                        <input class="input is-medium" type="text" placeholder="0.00000000" id="amountValue" name="amountValue" v-model="amountValPay">
+                                        <input class="input is-medium" type="text" placeholder="0.00000000" id="amountValue" name="amountValue" v-model="amountValPay" @keyup="parseAmountCrypto">
                                     </p>
                                 </div>
                             </div>
@@ -299,34 +299,40 @@ export default {
             this.sending = false;
             this.succesed = false;
             this.updateCurrencies();
-        }
-    },
-    watch: {
-        amountVal: function (amount) {
-            if (this.isWatch) {
-                return;
+        },
+        parseAmountCurrency (event) {
+            var keyCodeIgnore = [8, 13, 16, ];
+            var amount = this.amountVal;
+            if (keyCodeIgnore.indexOf(event.keyCode) === -1) {
+                if (amount) {
+                    var formatAmount;
+                    amount = amount.trim();
+                    if (amount.length <= 2) {
+                        formatAmount = (amount * 1e-2);
+                    } else {
+                        formatAmount = (
+                            (amount
+                                .replace(/\D/g, "")
+                                .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+                            ) * 1);
+                    }
+                    if (!isNaN(formatAmount)) {
+                        amount = this.amountVal = formatAmount.toFixed(2);
+                    } else {
+                        amount = this.amountVal = "0.00";
+                    }
+                }
             }
-            this.isWatch = true;
-            if (amount) {
-                this.amountVal = amount.replace(/\D/g, "")
-                .replace(/([0-9])([0-9]{2})$/, '$1.$2');
-            }
-            this.models.amount = amount;
+            this.models.amount = amount;            
             if (this.models.currency) {
                 this.amountValPay = amount / this.rates[this.models.currency].rate_usd;
             }
-            this.isWatch = false;
         },
-        amountValPay: function (amount) {
-            if (this.isWatch) {
-                return;
-            }
-            this.isWatch = true;
+        parseAmountCrypto (event) {
             if (this.models.currency) {
                 this.amountVal = amount * this.rates[this.models.currency].rate_usd;
-            }
-            this.isWatch = false;
+            }            
         }
-    }
+    },
 }
 </script>
