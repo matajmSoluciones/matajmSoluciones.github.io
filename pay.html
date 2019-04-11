@@ -1,176 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Matajm Soluciones - Desarrollo web full-stack</title>
-    <link rel="stylesheet" href="/dist/style.css">
-    <script type="text/javascript" src="/dist/main.js" async></script>
-    <script type="text/javascript" src="/dist/pay.js" async></script>
-</head>
-
-<body class="is-family-sans-serif">
-    <section class="hero is-light is-fullheight">
-        <nav class="level navbar is-black-metro has-padding-10">
-            <!-- Left side -->
-            <div class="level-left">
-                <div class="level-item  is-hidden-mobile">
-                    <figure class="image is-48x48">
-                        <img class="is-rounded" src="https://www.gravatar.com/avatar/86a5f43adbde2f2f09648c217ad6cc77">
-                    </figure>
-                </div>
-                <div class="level-item">
-                    <h1 class="title is-3">Matajm Soluciones</h1>
-                </div>
-            </div>
-            <div class="level-right">
-                <p class="level-item"><a href="/">Inicio</a></p>
-                <p class="level-item"><strong>Servicios</strong></p>
-                <p class="level-item"><a href="/products.html">Productos</a></p>
-                <p class="level-item"><a>Conocenos</a></p>
-            </div>
-        </nav>
-        <div class="hero-body">
-            <div class="container content">
-                <h1 class="title is-1 has-text-centered"><span class="icon has-margin-right-10"><i class="fas fa-money-bill-wave"></i></span> Pagar</h1>
-                <h3 class="subtitle is-3">Seleccione como desea pagar el servicio freelancer.</h3>
+---
+layout: page
+title: Pagar
+js:
+    - /dist/pay.js
+---
+<div class="hero-body">
+    <div class="container content">
+        <h1 class="title is-1 has-text-centered has-margin-bottom-20"><span class="icon has-margin-right-10"><i class="fas fa-money-bill-wave"></i></span> Pagar</h1>
+        <h3 class="subtitle is-3 has-text-centered">Seleccione como desea pagar el servicio freelancer.</h3>
+        <div class="columns is-centered has-padding-top-20">
+            <div class="column is-10">
                 <div class="columns is-centered">
-                    <div class="column is-10">
-                        <!-- Inicio del contenido -->
-                        <div class="columns is-vcentered is-centered">
+                    <!-- Inicio del contenido -->
+                    <div class="column is-3 has-margin-left-10 has-margin-right-10 has-margin-top-10-mobile">
+                        <div class="columns is-desktop is-centered has-text-centered box">
                             <!-- Inicio columna -->
                             <div class="column">
-                                <figure class="image is-128x128">
-                                    <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png">
-                                </figure>
+                                <span class="image"><i class="fab fa-paypal fa-8x"></i></span>
                             </div>
-                            <div class="column is-10 has-text-justified">
+                            <div class="column">
                                 <h2 class="title is-3 has-text-centered-mobile">Paypal</h2>
                                 <a href="https://www.paypal.me/matajmSoluciones" class="button is-medium is-link" target="_blank">Pagar</a>
                             </div>
                             <!-- Fin columna -->
-                        </div>                        
-                        <div class="columns is-vcentered is-centered">
-                            <!-- Inicio columna -->
+                        </div>
+                    </div>
+                    <!-- Por falta de tecnologia se omite -->
+                    <div class="column is-3 has-margin-left-10 has-margin-right-10 has-margin-top-10-mobile">
+                        <div class="columns is-desktop is-centered has-text-centered box">
                             <div class="column">
-                                <figure class="image is-128x128">
-                                    <img src="https://uphold.com/img/safari-pinned-tab.svg">
-                                </figure>
+                                <div class="columns is-mobile is-centered">
+                                    <figure class="image is-96x96 has-margin-top-20 has-margin-bottom-38">
+                                        <img src="/dist/uphold.svg" width="96" height="128">
+                                    </figure>
+                                </div>
                             </div>
-                            <div class="column is-10 has-text-justified">
+                            <div class="column">
                                 <h2 class="title is-3 has-text-centered-mobile">Uphold</h2>
-                                <a href="#" class="button is-medium is-link">Pagar</a>
+                                <a class="button is-medium is-static is-link has-margin-bottom-5" title="Solicite el pago en uphold durante la negociaci&oacute;n">Pagar</a>
                             </div>
-                            <!-- Fin columna -->
                         </div>
-                        <div class="columns is-vcentered is-centered">
+                    </div>
+                    <div class="column is-3 has-margin-left-10 has-margin-right-10 has-margin-top-10-mobile">
+                        <div class="columns is-desktop is-centered has-text-centered box">
                             <!-- Inicio columna -->
                             <div class="column">
-                                <figure class="image is-128x128">
-                                    <img src="https://www.payoneer.com/es/wp-content/uploads/sites/2/2015/04/logo.png">
-                                </figure>
+                                <div class="columns is-mobile is-centered">
+                                    <figure class="image is-128x128 has-margin-bottom-26">
+                                        <img src="/dist/payoneer.svg" class="has-margin-top-60" width="128" height="60">
+                                    </figure>
+                                </div>
                             </div>
-                            <div class="column is-10 has-text-justified">
+                            <div class="column">
                                 <h2 class="title is-3 has-text-centered-mobile">Payoneer</h2>
-                                <a href="#" class="button is-medium is-link">Pagar</a>
+                        <a href="#" class="button is-medium is-link is-static" title="Solicite el pago en payoneer durante la negociaci&oacute;n">Pagar</a>
                             </div>
                             <!-- Fin columna -->
-                        </div>
-                        <div class="columns is-vcentered is-centered">
+                        </div>                    
+                    </div>
+                    <div class="column is-3 has-margin-left-10 has-margin-right-10 has-margin-top-10-mobile">
+                        <div class="columns is-desktop is-centered has-text-centered box">
                             <!-- Inicio columna -->
-                            <div class="column">
-                                <span class="image has-text-centered"><i class="fas fa-university fa-5x"></i></span>
+                            <div class="column has-margin-top-10">
+                                <span class="image"><i class="fab fa-bitcoin fa-8x"></i></span>
                             </div>
-                            <div class="column is-10 has-text-justified">
-                                <h2 class="title is-3 has-text-centered-mobile">Criptomonedas</h2>
-                                <button class="button is-medium is-link" id="button-cryptopayment">Pagar</button>
+                            <div class="column">
+                                <h2 class="title is-5 has-text-centered-mobile">Criptomonedas</h2>
+                        <button class="button is-medium is-link" id="button-cryptopayment">Pagar</button>
                             </div>
                             <!-- Fin columna -->
-                        </div>
-                        <div class="modal" id="modal-crypto-receive">
-                            <div class="modal-background"></div>
-                            <div class="modal-content">
-                                <!-- Any other Bulma elements you want -->
-                                <div class="box">
-                                    <div class="columns is-mobile is-centered">
-                                        <div class="column is-8 has-text-centered">
-                                            <h3 class="title is-3">Pague aqu&iacute;</h3>
-                                            <h4 class="subtitle is-">Envie los fondos a la siguiente direcci&oacute;n electr&oacute;nica</h4>
-                                            <code id="address-help"></code>
-                                            <div class="columns is-mobile is-centered">
-                                                <div class="column">
-                                                    <figure class="image">
-                                                        <img id="qr_address">
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                            <p class="subtitle is-3" id="amount-pay-help"></p>
-                                            <small>Le notificaremos a trav&eacute;s de su correo electr&oacute;nico cuando su pago sea confirmado.</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="modal-close is-large" aria-label="close"></button>
-                        </div>
-                        <div class="modal" id="modal-crypto-finish">
-                            <div class="modal-background"></div>
-                            <div class="modal-content">
-                                <!-- Any other Bulma elements you want -->
-                                <div class="box">
-                                    <div class="columns is-mobile is-centered">
-                                        <div class="column is-8 has-text-centered">
-                                            <h3 class="title is-3">Pago finalizado</h3>
-                                            <h4 class="subtitle is-4 has-margin-bottom-10">Gracias por su transferencia</h4>
-                                            <div class="columns is-mobile is-centered">
-                                                <div class="column">
-                                                    <span class="icon is-large notification is-success has-expanded-icon-4 is-icon-circle">
-                                                        <i class="fas fa-check fa-5x"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <a id="url-help-crypto" target="_blank" class="button is-link has-margin-top-10">Ver detalles</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="modal-close is-large" aria-label="close"></button>
-                        </div>
-                        <!-- Fin del contenido -->
+                        </div>                    
                     </div>
                 </div>
+                <!-- Fin del contenido -->
             </div>
         </div>
-    </section>
-    <div id="elements"></div>
-    <footer class="footer">
-        <div class="columns is-centered">
-            <div class="column is-4">
-                <h3 class="title is-5">Soporte</h3>
-                <ul>
-                    <li>Ayuda</li>
-                    <li><a href="/products.html">Productos</a></li>
-                    <li>Enviar comentarios</li>
-                    <li>Condiciones</li>
-                </ul>
-            </div>
-            <div class="column is-4">
-                <h3 class="title is-5">Contenido</h3>
-                <ul>
-                    <li><a href="https://steemit.com/@matajm">Blog</a></li>
-                    <li><a href="/proyects.html">Proyectos</a></li>
-                </ul>
-            </div>
-            <div class="column is-4">
-                <h3 class="title is-5">Redes sociales</h3>
-                <ul>
-                    <li> <a target="_blank" href="https://t.me/matajmSoluciones">Twitter</a></li>
-                    <li><a href="https://t.me/matajmSoluciones" target="_blank">Telegram</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
-</body>
-
-</html>
+    </div>
+</div>
+<div id="elements"></div>

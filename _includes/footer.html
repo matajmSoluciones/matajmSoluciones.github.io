@@ -1,0 +1,14 @@
+<footer class="footer">
+    <div class="columns is-centered">
+        {% for item in site.data.nav_footer %}
+            <div class="column is-4">
+                <h3 class="title is-5">{{ item.category }}</h3>
+                <ul>
+                    {% for link in item.items %}
+                        <li><a href="{{ link.link }}"{% if link.email %}data-email="true"{% endif %}>{{ link.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}        
+    </div>
+</footer>

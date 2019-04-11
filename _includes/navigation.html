@@ -1,0 +1,11 @@
+<div class="level-right">
+	{% for item in site.data.navigation %}
+		<p class="level-item">
+			{% if page.url == item.link %}
+				<strong>{{ item.name }}</strong>
+			{% else %}
+				<a href="{{ item.link }}">{{ item.name }}</a>
+			{% endif %}
+		</p>
+	{% endfor %}
+</div>

@@ -329,9 +329,11 @@ export default {
             }
         },
         parseAmountCrypto (event) {
+            var amount = this.amountValPay;
             if (this.models.currency) {
-                this.amountVal = amount * this.rates[this.models.currency].rate_usd;
-            }            
+                var formatAmount = amount * this.rates[this.models.currency].rate_usd;
+                this.amountVal = formatAmount.toFixed(2);
+            }
         }
     },
 }

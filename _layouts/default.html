@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+    {% include header.html %}    
+    <body class="is-family-sans-serif">
+        <section class="hero is-link is-middle cover">
+        	<nav class="level navbar has-padding-10">
+			    <!-- Left side -->
+			    <div class="level-left"></div>
+			    <div class="level-right">
+                    {% include navigation.html %}
+			    </div>
+			</nav>
+        </section>
+        {{ content }}
+		{% include footer.html %}        
+    </body>
+</html>

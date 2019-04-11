@@ -1,0 +1,10 @@
+- name: Inicio
+  link: /
+- name: Servicios
+  link: /services.html
+- name: Productos
+  link: /products.html
+- name: Pagar
+  link: /pay.html
+- name: Conocenos
+  link: /about.html
