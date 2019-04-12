@@ -58265,6 +58265,66 @@ readers do not read off random characters that represent icons */
 .is-self-align-right {
   align-self: flex-end; }
 
+.has-expanded-icon-1 {
+  padding: 1em; }
+
+.has-expanded-icon-sm-1 {
+  padding: 0.1em; }
+
+.has-expanded-icon-2 {
+  padding: 2em; }
+
+.has-expanded-icon-sm-2 {
+  padding: 0.2em; }
+
+.has-expanded-icon-3 {
+  padding: 3em; }
+
+.has-expanded-icon-sm-3 {
+  padding: 0.3em; }
+
+.has-expanded-icon-4 {
+  padding: 4em; }
+
+.has-expanded-icon-sm-4 {
+  padding: 0.4em; }
+
+.has-expanded-icon-5 {
+  padding: 5em; }
+
+.has-expanded-icon-sm-5 {
+  padding: 0.5em; }
+
+.has-expanded-icon-6 {
+  padding: 6em; }
+
+.has-expanded-icon-sm-6 {
+  padding: 0.6em; }
+
+.has-expanded-icon-7 {
+  padding: 7em; }
+
+.has-expanded-icon-sm-7 {
+  padding: 0.7em; }
+
+.has-expanded-icon-8 {
+  padding: 8em; }
+
+.has-expanded-icon-sm-8 {
+  padding: 0.8em; }
+
+.has-expanded-icon-9 {
+  padding: 9em; }
+
+.has-expanded-icon-sm-9 {
+  padding: 0.9em; }
+
+.has-expanded-icon-10 {
+  padding: 10em; }
+
+.has-expanded-icon-sm-10 {
+  padding: 1em; }
+
 .is-black-metro {
   background-color: #24292e !important; }
 
@@ -58288,6 +58348,4 @@ readers do not read off random characters that represent icons */
   margin-bottom: 24px; }
 
 .is-icon-circle {
-  border-radius: 50%;
-  width: 36px;
-  height: 36px; }
+  border-radius: 50%; }
