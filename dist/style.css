@@ -58349,3 +58349,7 @@ readers do not read off random characters that represent icons */
 
 .is-icon-circle {
   border-radius: 50%; }
+
+@media screen and (max-width: 768px) {
+  .cover nav.navbar {
+    padding-bottom: calc(185px + 3.5em); } }
